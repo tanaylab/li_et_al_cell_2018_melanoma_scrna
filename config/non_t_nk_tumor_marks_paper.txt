@@ -1,0 +1,7 @@
+name	gene	color	T_fold
+mature-DC	FSCN1	"#7195d2"	2
+immature-DC	CD1A	"#1d4895"	2
+non-classic-monocyte	CDKN1C	"#cd7f62"	2
+
+
+

@@ -1,0 +1,7 @@
+name	gene	color	T_fold
+macrophage	C1QA	"#d9491d"	2
+DC	FCER1A	"#2760c7"	1
+pDC	IRF8	"gold"	3
+plasma	XBP1	"#565902"	3
+Tfh	CXCL13	"#107538"	4
+NK	KLRF1	"#a3733d"	2

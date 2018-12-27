@@ -1,0 +1,8 @@
+supid	color	name
+1	"#fbc0a2"	osteoclast
+8	"#d9491d"	macrophage
+14	"#2760c7"	DC
+32	"#af5031"	monocyte
+40	"#565902"	plasma
+42	"#3dbaba"	pDC
+59	"#8c8303"	B

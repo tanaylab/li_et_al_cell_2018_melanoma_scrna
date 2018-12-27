@@ -1,0 +1,60 @@
+mc_plot_device: png
+
+scm_spike_regexp: ERCC
+
+scm_mars_wells2cells_fn: data/wells_cells.txt
+
+
+mcell_mc2d_K: 60
+mcell_mc2d_T_edge: 0.005
+mcell_mc2d_max_confu_deg: 4
+mcell_mc2d_edge_asym: TRUE
+mcell_mc2d_k_expand_inout_factor: NULL
+mcell_mc2d_proj_blur: 0.02
+mcell_mc2d_K_cellproj: 20
+
+mcp_heatmap_width: 2000
+mcp_heatmap_height: 3000
+mcp_heatmap_text_cex: 2
+mcp_heatmap_alt_side_text: true
+
+scm_mc_mark_k_per_clust: 3
+
+mcp_colorize_by_seq_priority: true
+
+mcp_metadata_annot_colors:
+  stage:
+    "2": '#fee0d2'
+    "3": '#fc9272'
+    "4": '#de2d26'
+  location:
+    "p(S)C": lightblue
+    "(S)C": blue
+    "MSC": darkorchid2
+    "Lung": coral1
+    "LN": green
+  treatment:
+    "N/A": white
+    "N": grey
+    T: darkgoldenrod1
+    1IT: '#2ca25f'
+    2IT: '#2ca25f'
+    mIT: '#2ca25f'
+    N_DAT: lightgrey
+    2IT_DAT: lightgrey
+    N_Un: darkgrey
+    2IT_Un: darkgrey
+    IFN100: '#fa9fb5'
+    N_IFN100: '#fa9fb5'
+    2IT_IFN100: '#fa9fb5'
+    IFN1000: '#c51b8a'
+    N_IFN1000: '#c51b8a'
+    2IT_IFN1000: '#c51b8a'
+    N_aPD1: '#de2d26'
+    2IT_aPD1: '#de2d26'
+  batch_set_id:
+    Melanoma: royalblue
+    PBMC: red
+    "Melanoma;PBMC": indianred1
+    TumorBlocks: darkolivegreen
+    "Melanoma;TumorBlocks": darkolivegreen3

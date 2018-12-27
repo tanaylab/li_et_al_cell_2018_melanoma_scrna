@@ -1,0 +1,3 @@
+name	gene	color	T_fold
+erythrocyte	HBB	red	3
+

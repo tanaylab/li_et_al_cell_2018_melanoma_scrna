@@ -1,0 +1,2 @@
+name	gene	color	T_fold
+dysf-cd4	CD200	"#ea5162"	1

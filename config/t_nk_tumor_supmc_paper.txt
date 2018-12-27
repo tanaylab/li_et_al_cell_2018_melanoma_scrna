@@ -1,0 +1,16 @@
+supid	color	name
+1	"#a76eaf"	dysfunctional
+17	"#b3d4f0"	naive
+25	"#59b56f"	Treg
+15	"#107538"	Tfh
+44	"#a3733d"	NK
+50	"#a76eaf"	dysfunctional
+59	"#fdb913"	effector2
+54	"#cee6b9"	em-cd4
+65	"#d29bc6"	effector1
+73	"#a76eaf"	dysfunctional
+83	"#d29bc6"	effector1
+82	"#b3d4f0"	naive
+99	"#d29bc6"	effector1
+115	"#a76eaf"	dysfunctional
+148	"#a76eaf"	dysfunctional

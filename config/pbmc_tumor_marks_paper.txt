@@ -1,0 +1,5 @@
+name	gene	color	T_fold
+plasma	MZB1	"#565902"	3
+Tfh	CXCL13	"#107538"	4
+DC	CD1C	"#2760c7"	1.3
+macrophage	C1QB	"#d9491d"	1

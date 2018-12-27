@@ -1,0 +1,11 @@
+supid	color	name
+8	"#8c8303"	B
+27	"#b3d4f0"	naive
+48	"#d29bc6"	effector1
+52	"#a3733d"	NK
+60	"#fdb913"	effector2
+66	"#cee6b9"	em
+72	"#59b56f"	Treg
+87	"#a76eaf"	dysfunctional
+100	"#cee6b9"	em
+119	"#af5031"	monocyte

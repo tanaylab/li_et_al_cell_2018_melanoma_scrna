@@ -1,0 +1,7 @@
+name	gene	color	T_fold
+DC	FSCN1	"#2760c7"	2
+DC	CD1A	"#2760c7"	2
+monocyte	CDKN1C	"#af5031"	2
+
+
+

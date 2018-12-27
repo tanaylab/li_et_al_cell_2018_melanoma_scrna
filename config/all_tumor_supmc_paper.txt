@@ -1,0 +1,9 @@
+supid	color	name
+129	"#a76eae"	T
+86	"#a3733d"	NK
+245	"#8b8432"	B
+229	"#575a27"	plasma
+230	"#cd7e61"	pDC
+18	"#cd7e61"	myeloid
+4	"#6d6e71"	melanocyte
+1	"#cd7e61"	osteoclast	
