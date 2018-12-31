@@ -15,9 +15,17 @@ The core analysis is done with the [metacell](https://tanaylab.bitbucket.io/meta
 
 #### Requirements
 
-R with these packages: &lt;&lt;&lt;&lt;&lt;&lt;&lt; working copy
+R with these packages:
 
-======= &gt;&gt;&gt;&gt;&gt;&gt;&gt; destination \* Matrix \* pheatmap \* flowCore \* dplyr \* glmnet \* plotrix \* MASS \* data.table \* [metacell](https://tanaylab.bitbucket.io/metacell-r/index.html)
+-   Matrix
+-   pheatmap
+-   flowCore
+-   dplyr
+-   glmnet
+-   plotrix
+-   MASS
+-   data.table
+-   [metacell](https://tanaylab.bitbucket.io/metacell-r/index.html)
 
 **Note**: Metacell is implemented in R and C++. In particular it uses the Tanay group tgstat library that utilizes shared memory and distributed computing (as well as some specific optional CPU features). The package is tested on linux and macbooks, and is currently not compatible on Windows. A typical application of metacell requires at least 16G RAM. For the current dataset we recommend a dual CPU multi-core workstation with 128GM RAM or more.
 
