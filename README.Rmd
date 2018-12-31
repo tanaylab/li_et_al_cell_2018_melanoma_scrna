@@ -29,10 +29,7 @@ The core analysis is done with the [metacell](https://tanaylab.bitbucket.io/meta
 #### Requirements
 
 R with these packages:
-<<<<<<< working copy
 
-=======
->>>>>>> destination
 * Matrix
 * pheatmap
 * flowCore
@@ -47,6 +44,7 @@ R with these packages:
 For the current dataset we recommend a dual CPU multi-core workstation with 128GM RAM or more.
 
 #### Usage
+
 In an R session opened on the repository root directory
 ```{r, eval=FALSE, warning=FALSE}
 # Loading code and downloading required data files
@@ -67,4 +65,5 @@ source("guo2018.r")
 In order to reproduce the exact figures as in the paper (e.g. supporting the manually selected metacell IDs for annotation), the metacell object used in the paper is supplied and used by the generate_figs function. This function also does a cross-metacell comparison to compare the cell membership between the 2 metacell solutions, which demonstrate that the differences are not substantial. 
 
 #### Contact
+
 For help, please contact yaniv.lubling@weizmann.ac.il
