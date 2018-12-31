@@ -29,6 +29,10 @@ The core analysis is done with the [metacell](https://tanaylab.bitbucket.io/meta
 #### Requirements
 
 R with these packages:
+<<<<<<< working copy
+
+=======
+>>>>>>> destination
 * Matrix
 * pheatmap
 * flowCore
