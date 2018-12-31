@@ -1,10 +1,10 @@
 supid	color	name
-4	"#af5031"	monocyte
-17	"#b3d4f0"	naive
-29	"navyblue"	naive-like
-41	"#fdb913"	effector2
-48	"#d29bc6"	effector1
-55	"#59b56f"	Treg
-61	"#a76eaf"	dysfunctional
-70	"#8c8303"	B
-
+3	"#af5031"	monocyte
+17	"#a76eaf"	dysfunctional
+14	"#d29bc6"	effector1
+24	"#a3733d"	NK
+30	"#fdb913"	effector2
+51	"#b3d4f0"	naive
+63	"#59b56f"	Treg
+65	"navyblue"	naive-like
+72	"#8c8303"	B

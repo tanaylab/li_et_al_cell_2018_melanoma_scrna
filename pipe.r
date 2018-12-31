@@ -536,24 +536,34 @@ compare_mc_partitioning = function(mc1_id, mc2_id, do_log=F, ord1='by_col', ord2
 #
 fig_s_pbmc_plots = function(paper_version=F) 
 {
+	if (paper_version) {
+		mc_id = paste0(pbmc_tumors_comp_id, "_paper")
+		graph_id = mc_id
+	} else {
+		mc_id = paste0(pbmc_tumors_comp_clean_id, "_nosmall")
+		graph_id = paste0(pbmc_tumors_comp_id, "_nosmall")
+	}
+	mat_id = graph_id 
+	lateral_gset_id = paste0(graph_id, "_lateral")
+	
 	# annotate the metacells
-	conf_pbmc_res <<- colorize_by_confusion_mat(mc_id= pbmc_tumors_comp_id, graph_id=pbmc_tumors_comp_id)
+	conf_pbmc_res <<- colorize_by_confusion_mat(mc_id = mc_id, graph_id = graph_id)
 	
 	# Manual stop here to generate the supmc and marks files
 	if (paper_version) {
-		conf_pbmc_res <<- colorize_by_confusion_mat(mc_id= pbmc_tumors_comp_id, graph_id=pbmc_tumors_comp_id, supmc_file="config/pbmc_tumor_supmc_paper.txt", marks_file="config/pbmc_tumor_marks_paper.txt", res=conf_pbmc_res)
+		conf_pbmc_res <<- colorize_by_confusion_mat(mc_id= mc_id, graph_id=graph_id, supmc_file="config/pbmc_tumor_supmc_paper.txt", marks_file="config/pbmc_tumor_marks_paper.txt", res=conf_pbmc_res)
 	} else {
-		conf_pbmc_res <<- colorize_by_confusion_mat(mc_id= pbmc_tumors_comp_id, graph_id=pbmc_tumors_comp_id, supmc_file="config/pbmc_tumor_supmc_nosmall.txt", marks_file="config/pbmc_tumor_marks_nosmall.txt", res=conf_pbmc_res)
+		conf_pbmc_res <<- colorize_by_confusion_mat(mc_id= mc_id, graph_id= graph_id, supmc_file="config/pbmc_tumor_supmc_nosmall.txt", marks_file="config/pbmc_tumor_marks_nosmall.txt", res=conf_pbmc_res)
 	}
 	
-	mel_basic_mc_mc2d_plots(mc_id=pbmc_tumors_comp_id, mat_id=pbmc_tumors_comp_id, graph_id=pbmc_tumors_comp_id, lateral_gset_id = lateral_gset_id)
+	mel_basic_mc_mc2d_plots(mc_id=mc_id, mat_id=mat_id, graph_id=graph_id, lateral_gset_id = lateral_gset_id)
 	
-	mcell_mc2d_plot(pbmc_tumors_comp_id)
+	#mcell_mc2d_plot(mc_id)
 	
-	mel_plot_e_gc_barplots(pbmc_tumors_comp_id, "all_hm_genes", genes=t_nk_genes, ncol=2, panel_height=48, panel_width=280, ord_first_by_color=T)
+	mel_plot_e_gc_barplots(mc_id, "all_hm_genes", genes=t_nk_genes, ncol=2, panel_height=48, panel_width=280, ord_first_by_color=T)
 
-	mat_pbmc = scdb_mat(pbmc_tumors_comp_id)
-	mc_pbmc = scdb_mc(pbmc_tumors_comp_id)
+	mat_pbmc = scdb_mat(mat_id)
+	mc_pbmc = scdb_mc(mc_id)
 	p_col2group = get_mc_col2group(mc_pbmc)
 	p_group2col = get_mc_group2col(mc_pbmc)
 	md = mat_pbmc@cell_metadata[names(mc_pbmc@mc), ]
@@ -570,11 +580,11 @@ fig_s_pbmc_plots = function(paper_version=F)
 	
 	all_pbmc_pat_nms = c("p13-3-(S)C-N", "p17-3-(S)C-N-1", "p17-3-(S)C-N-2", "p27-4-(S)C-1IT", "p13_PBMC-3-(S)C-N", "p17_PBMC-3-(S)C-N", "p27_PBMC-4-(S)C-1IT")
 	
-	mcell_mc2d_plot_by_factor(mc2d_id=pbmc_tumors_comp_id, mat_id=pbmc_tumors_comp_id, meta_field="PatientID", single_plot=F, neto_points=T, filter_values=all_pbmc_pat_nms)
+	mcell_mc2d_plot_by_factor(mc2d_id=mc_id, mat_id=mat_id, meta_field="PatientID", single_plot=F, neto_points=T, filter_values=all_pbmc_pat_nms)
 	
 	pbmc_pat_nms = grep("^p17", all_pbmc_pat_nms, v=T, invert=T)
 	
-	.plot_start(scfigs_fn(pbmc_tumors_comp_id, "pat_grp_comp"), 600, 300)
+	.plot_start(scfigs_fn(mc_id, "pat_grp_comp"), 600, 300)
 	layout(matrix(c(3,1:2), nrow=1))
 	for (ctype in c('CD3', 'CD45')) {
 		dum = expand.grid(pbmc_pat_nms, pbmc_grp_nms)
@@ -586,7 +596,7 @@ fig_s_pbmc_plots = function(paper_version=F)
 	}
 	dev.off()
 
-	metacell:::plot_color_bar(vals=pbmc_grp_nms, cols=p_group2col[pbmc_grp_nms], title="", fig_fn=scfigs_fn(pbmc_tumors_comp_id, "group_colors_legend"))
+	metacell:::plot_color_bar(vals=pbmc_grp_nms, cols=p_group2col[pbmc_grp_nms], title="", fig_fn=scfigs_fn(mc_id, "group_colors_legend"))
 
 	
 }

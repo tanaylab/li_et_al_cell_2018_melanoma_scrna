@@ -145,6 +145,7 @@ lfp_gu = log2(mc_guo_ours@mc_fp)
 lfp_t = log2(mc_t_nk@mc_fp)
 
 f_cd8_mc = mc_t_nk@colors %in% t_group2col[cd8_nms]
+f_treg_mc = mc_t_nk@colors %in% t_group2col['Treg']
 
 gg = intersect(rownames(lfp_t), rownames(lfp_gu))
 
@@ -238,15 +239,20 @@ for (i in seq_along(clusts1)) {
 
 # compare mean umi (geom-mean) per group - melanoma vs lung (norm by diff in naives)
 mat_t_nk = scdb_mat(tumor_t_nk_id)
+mat_t_nk_ds = scm_downsamp(mat_t_nk@mat, 500)
 
 mel_lat_gset = scdb_gset(lateral_gset_id)
 mel_lat_genes = names(mel_lat_gset@gene_set)
 all_genes_ann = annotate_genes(rownames(lfp_t))
 gf = apply(lfp_t[, f_cd8_mc], 1, max) > 1 & !grepl("TF", all_genes_ann$type) & (! (rownames(lfp_t) %in% mel_lat_genes))
 dysf_genes =  tail(sort(cor(lfp_t['LAG3', f_cd8_mc], t(lfp_t[gf, f_cd8_mc]))[1,]), 30)
+cyto_genes =  tail(sort(cor(lfp_t['FGFBP2', f_cd8_mc], t(lfp_t[gf, f_cd8_mc]))[1,]), 30)
+
+treg_gf = apply(lfp_t[, f_treg_mc], 1, max) > 1 & !grepl("TF", all_genes_ann$type)& (! (rownames(lfp_t) %in% mel_lat_genes))
+treg_genes =  tail(sort(cor(lfp_t["IL2RA", f_treg_mc], t(lfp_t[treg_gf, f_treg_mc]))[1,]), 30)
 
 # mel vs corresponding lung mc grp gene comparison
-compare_mel_to_lung_corresponding_group = function(mel_grp='dysfunctional', lung_grp='CD8-dysf', mel_genes=names(dysf_genes), lung_ref_grp='CD8-GZMK', de_min_enr=2, de_min_max_umi_per_cell=0.005, text_cex=1, size=600, re_to_filt="^MIR[0-9]|^SNOR[A-Z][0-9]", umi_reg=64, min_xlim=3, mel_naive='naive', lung_naive='naive-CXCR6', n_bp_genes=450, gene_labels_to_show=NA, mel_reg=10, lung_reg=10, mat_guo_as_ds=NULL, points_col=NULL, name="")
+compare_mel_to_lung_corresponding_group = function(mc_t_nk, mat_t_nk_ds, mel_grp='dysfunctional', lung_grp='CD8-dysf', mel_genes=names(dysf_genes), lung_ref_grp='CD8-GZMK', de_min_enr=2, de_min_max_umi_per_cell=0.005, text_cex=1, size=600, re_to_filt="^MIR[0-9]|^SNOR[A-Z][0-9]", umi_reg=64, min_xlim=3, mel_naive='naive', lung_naive='naive-CXCR6', n_bp_genes=450, gene_labels_to_show=NA, mel_reg=10, lung_reg=10, mat_guo_as_ds=NULL, points_col=NULL, name="")
 {
 	message(sprintf("compare %s (by %s) mel to %s (by %s) lung", mel_grp, mel_naive, lung_grp, lung_naive))
 	gg = intersect(rownames(mc_t_nk@mc_fp), rownames(mc_guo_ours@mc_fp))
@@ -375,10 +381,10 @@ compare_mel_to_lung_corresponding_group = function(mel_grp='dysfunctional', lung
 	list(x=x, y=y, x1=x1, y1=y1, mel_gs=mel_gs, lung_gs=lung_gs, mel_de=mel_de, lung_de=lung_de)
 }
 
-ml_dysf = compare_mel_to_lung_corresponding_group(umi_reg = 64)
-ml_cyto = compare_mel_to_lung_corresponding_group(mel_grp='effector2', lung_grp='CD8-cyto', mel_genes=names(cyto_genes), umi_res = 64)
-ml_dysf_by_cyto = compare_mel_to_lung_corresponding_group(mel_grp = 'dysfunctional', lung_grp = 'CD8-dysf', mel_genes = names(dysf_genes), lung_ref_grp='CD8-cyto', mel_naive='effector2', lung_naive = 'CD8-cyto', umi_reg = 64)
-ml_treg = compare_mel_to_lung_corresponding_group(mel_grp='Treg', lung_grp='tumor-Treg', lung_ref_grp='blood-Treg', mel_genes=names(treg_genes), umi_res = 64)
+ml_dysf = compare_mel_to_lung_corresponding_group(mc_t_nk, mat_t_nk_ds, umi_reg = 64)
+ml_cyto = compare_mel_to_lung_corresponding_group(mc_t_nk, mat_t_nk_ds, mel_grp='effector2', lung_grp='CD8-cyto', mel_genes=names(cyto_genes), umi_reg = 64)
+ml_dysf_by_cyto = compare_mel_to_lung_corresponding_group(mc_t_nk, mat_t_nk_ds, mel_grp = 'dysfunctional', lung_grp = 'CD8-dysf', mel_genes = names(dysf_genes), lung_ref_grp='CD8-cyto', mel_naive='effector2', lung_naive = 'CD8-cyto', umi_reg = 64)
+ml_treg = compare_mel_to_lung_corresponding_group(mc_t_nk, mat_t_nk_ds, mel_grp='Treg', lung_grp='tumor-Treg', lung_ref_grp='blood-Treg', mel_genes=names(treg_genes), umi_reg = 64)
 
 y = read.table(scfigs_fn(guo_our_mc_clean_id, "mel_dysfunctional_by_naive_vs_lung_CD8-dysf_by_naive-CXCR6_genes", ext="txt"), header=T)
 y = y[order(y$lung_enr - y$mel_enr), ]
@@ -389,10 +395,10 @@ legend("topleft", legend=c('Melanoma', 'Lung'), fill=c(t_group2col['dysfunctiona
 dev.off()
 
 dysf_genes_to_show = unique(c('KLRK1', 'KLRC4-KLRK1', 'CD8A', 'KLRD1', 'KLRC4', 'KLRC1', 'CD8B', 'KLRC3', 'NKG7', 'KLRC2', 'GZMB', 'CCL3', 'ANAPC1P1', 'ZNF683', 'KRT86', 'TNFRSF9', 'RRM2', 'VCAM1', 'KRT81', 'CCL4', 'KIR2DL4', 'CCL3', 'VCAM1', 'TNFRSF9', 'TNS3', 'NKG7', 'GZMB', 'SPRY2', 'CCL4', 'CCL4L1', 'CXCL13', 'AKAP5', 'LAG3', 'CD8A', 'IFNG', 'ITGA2', 'PHLDA1', 'SLC2A8', 'ID3', 'ZBED2', 'EGR2', 'CSF1', 'TNFSF9', 'EOMES', 'TNFSF4', 'SPRY2', 'PDCD1', 'CTLA4'))
-ml_dysf = compare_mel_to_lung_corresponding_group(umi_res = 64, gene_labels_to_show = dysf_genes_to_show, points_col='grey', name="_manual")
+ml_dysf = compare_mel_to_lung_corresponding_group(mc_t_nk, mat_t_nk_ds, umi_reg = 64, gene_labels_to_show = dysf_genes_to_show, points_col='grey', name="_manual")
 
 treg_genes_to_show = c('BATF', 'CCL22', 'CCR8', 'CD177', 'CSF1', 'CSF2RB', 'CTLA4', 'CX3CR1', 'EBI3', 'ENTPD1', 'FANK1', 'FOXP3', 'GNG8', 'IKZF2', 'IL12RB2', 'IL1R1', 'IL1R2', 'IL1RN', 'IL2RA', 'LAIR2', 'LAYN', 'LTA', 'PHLDA1', 'TIGIT', 'TNFRSF13B', 'TNFRSF18', 'TNFRSF1B', 'TNFRSF4', 'TNFRSF8', 'TNFRSF9', 'VDR', 'ZBED2', 'ZBTB32', 'PDCD1')
-ml_treg = compare_mel_to_lung_corresponding_group(mel_grp='Treg', lung_grp='tumor-Treg', lung_ref_grp='blood-Treg', mel_genes=names(treg_genes), umi_res = 64, gene_labels_to_show = treg_genes_to_show, points_col='grey', name="_manual")
+ml_treg = compare_mel_to_lung_corresponding_group(mc_t_nk, mat_t_nk_ds, mel_grp='Treg', lung_grp='tumor-Treg', lung_ref_grp='blood-Treg', mel_genes=names(treg_genes), umi_reg = 64, gene_labels_to_show = treg_genes_to_show, points_col='grey', name="_manual")
 
 y = read.table(scfigs_fn(guo_our_mc_clean_id, "mel_Treg_by_naive_vs_lung_tumor-Treg_by_naive-CXCR6_genes", ext="txt"), header=T)
 y = y[order(y$lung_enr - y$mel_enr), ]
