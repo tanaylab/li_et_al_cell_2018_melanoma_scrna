@@ -1,17 +1,34 @@
 Single-cell RNA analysis of immune cells from melanoma tumors
 =============================================================
 
-This repository holds the code that reproduce the analysis done in the [Li et al, 2018](https://www.cell.com/cell/fulltext/S0092-8674(18)31568-X) paper. It also downloads the required processed and auxilary data.
+This repository holds the code that reproduce the analysis done in the
+[Li et al,
+2018](https://www.cell.com/cell/fulltext/S0092-8674(18)31568-X) paper.
+It also downloads the required processed and auxilary data.
 
-The core analysis is done with the [metacell](https://tanaylab.bitbucket.io/metacell-r/index.html) R package.
+The core analysis is done with the
+[metacell](https://tanaylab.bitbucket.io/metacell-r/index.html) R
+package.
 
 #### Quick Links
 
--   Metacell paper: Baran et al. 2018 ([bioarxiv](https://www.biorxiv.org/content/early/2018/10/08/437665)).
--   Metacell R package [homepage](https://tanaylab.bitbucket.io/metacell-r/index.html) (with functions reference and usage vignettes).
--   Raw data is available under EGA accession EGAS00001003363 (access is restricted, follow guidelines at the EGA site)
--   Processed data is avaliable under GEO accession [GSE123139](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE123139)
--   Code repository for the TCR sequences analysis is available at [TCRseq](https://github.com/DiklaGelbard/TCRseq) github page.
+-   Metacell paper: Baran et al. 2018
+    ([bioarxiv](https://www.biorxiv.org/content/early/2018/10/08/437665)).
+-   Metacell R package
+    [homepage](https://tanaylab.bitbucket.io/metacell-r/index.html)
+    (with functions reference and usage vignettes).
+-   Raw data is available under EGA accession EGAS00001003363 (access is
+    restricted, follow guidelines at the EGA site)
+-   Processed data is avaliable under GEO accession
+    [GSE123139](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE123139)
+-   Raw UMI counts for all cells:
+    [Li2018\_umi\_counts.tar.gz](http://www.wisdom.weizmann.ac.il/~lubling/Li2018/Li2018_umi_counts.tar.gz)
+    (a gzipped archive with gene-cells UMI table in matrix-market format
+    and with a metadata table per cell. Note that metacell assignments
+    are supplied in Table 3 in the online version of the
+    [paper](https://www.cell.com/cell/fulltext/S0092-8674(18)31568-X)).
+-   Code repository for the TCR sequences analysis is available at
+    [TCRseq](https://github.com/DiklaGelbard/TCRseq) github page.
 
 #### Requirements
 
@@ -27,7 +44,13 @@ R with these packages:
 -   data.table
 -   [metacell](https://tanaylab.bitbucket.io/metacell-r/index.html)
 
-**Note**: Metacell is implemented in R and C++. In particular it uses the Tanay group tgstat library that utilizes shared memory and distributed computing (as well as some specific optional CPU features). The package is tested on linux and macbooks, and is currently not compatible on Windows. A typical application of metacell requires at least 16G RAM. For the current dataset we recommend a dual CPU multi-core workstation with 128GM RAM or more.
+**Note**: Metacell is implemented in R and C++. In particular it uses
+the Tanay group tgstat library that utilizes shared memory and
+distributed computing (as well as some specific optional CPU features).
+The package is tested on linux and macbooks, and is currently not
+compatible on Windows. A typical application of metacell requires at
+least 16G RAM. For the current dataset we recommend a dual CPU
+multi-core workstation with 128GM RAM or more.
 
 #### Usage
 
@@ -47,7 +70,15 @@ generate_figs()
 source("guo2018.r")
 ```
 
-**Note**: Metacell generation was sensitive to the initial random seed, so the exact metacell solution cannot be exactly reproduced. build\_metacells function is included for reference, to see how the metacells where produced. In order to reproduce the exact figures as in the paper (e.g. supporting the manually selected metacell IDs for annotation), the metacell object used in the paper is supplied and used by the generate\_figs function. This function also does a cross-metacell comparison to compare the cell membership between the 2 metacell solutions, which demonstrate that the differences are not substantial.
+**Note**: Metacell generation was sensitive to the initial random seed,
+so the exact metacell solution cannot be exactly reproduced.
+build\_metacells function is included for reference, to see how the
+metacells where produced. In order to reproduce the exact figures as in
+the paper (e.g. supporting the manually selected metacell IDs for
+annotation), the metacell object used in the paper is supplied and used
+by the generate\_figs function. This function also does a cross-metacell
+comparison to compare the cell membership between the 2 metacell
+solutions, which demonstrate that the differences are not substantial.
 
 #### Contact
 
