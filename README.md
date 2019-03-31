@@ -21,12 +21,12 @@ package.
     restricted, follow guidelines at the EGA site)
 -   Processed data is avaliable under GEO accession
     [GSE123139](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE123139)
--   Raw UMI counts for all cells:
-    [Li2018\_umi\_counts.tar.gz](http://www.wisdom.weizmann.ac.il/~lubling/Li2018/Li2018_umi_counts.tar.gz)
-    (a gzipped archive with gene-cells UMI table in matrix-market format
-    and with a metadata table per cell. Note that metacell assignments
-    are supplied in Table 3 in the online version of the
-    [paper](https://www.cell.com/cell/fulltext/S0092-8674(18)31568-X)).
+-   Raw UMI counts for all cells with metacell membership information:
+    [Li2018\_umi\_counts.tar.gz](http://www.wisdom.weizmann.ac.il/~lubling/Li2018/Li2018_umi_counts.tar.gz).
+    This gzipped archive contains a gene-cells UMI table in
+    matrix-market format and a metadata table per cell. The metadata
+    table also contains the metacell membership and the annotated group
+    per metacell model - all cells, T/NK cells and non-T/NK cells.
 -   Code repository for the TCR sequences analysis is available at
     [TCRseq](https://github.com/DiklaGelbard/TCRseq) github page.
 
