@@ -2,7 +2,7 @@ source("util_funcs.r")
 
 # download data files
 if (!file.exists("data")) {
-	download.file("http://www.wisdom.weizmann.ac.il/~lubling/Li2018/data_Li2018.tar.gz", "data_Li2018.tar.gz")
+	download.file("https://schic2.s3.eu-west-1.amazonaws.com/Li2018/data_Li2018.tar.gz", "data_Li2018.tar.gz")
 	
 	system("tar xfz data_Li2018.tar.gz")
 }
@@ -13,7 +13,7 @@ if (!file.exists("data/GSE99254_NSCLC.TCell.S12346.TPM.txt")) {
 }
 
 if (!file.exists("scrna_db_Li2018")) {
-	download.file("http://www.wisdom.weizmann.ac.il/~lubling/Li2018/scrna_db_Li2018.tar.gz", "scrna_db_Li2018.tar.gz")
+	download.file("https://schic2.s3.eu-west-1.amazonaws.com/Li2018/scrna_db_Li2018.tar.gz", "scrna_db_Li2018.tar.gz")
 	
 	system("tar xfz scrna_db_Li2018.tar.gz")
 }
