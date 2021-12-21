@@ -42,7 +42,7 @@ R with these packages:
 -   plotrix
 -   MASS
 -   data.table
--   [metacell](https://tanaylab.bitbucket.io/metacell-r/index.html)
+-   [metacell](https://tanaylab.github.io/metacell/index.html)
 
 **Note**: Metacell is implemented in R and C++. In particular it uses
 the Tanay group tgstat library that utilizes shared memory and
@@ -73,7 +73,7 @@ source("guo2018.r")
 **Note**: Metacell generation was sensitive to the initial random seed,
 so the exact metacell solution cannot be exactly reproduced.
 build\_metacells function is included for reference, to see how the
-metacells where produced. In order to reproduce the exact figures as in
+metacells were produced. In order to reproduce the exact figures as in
 the paper (e.g. supporting the manually selected metacell IDs for
 annotation), the metacell object used in the paper is supplied and used
 by the generate\_figs function. This function also does a cross-metacell
