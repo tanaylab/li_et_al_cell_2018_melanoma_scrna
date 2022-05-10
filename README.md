@@ -7,7 +7,7 @@ This repository holds the code that reproduce the analysis done in the
 It also downloads the required processed and auxilary data.
 
 The core analysis is done with the
-[metacell](https://tanaylab.bitbucket.io/metacell-r/index.html) R
+[metacell](https://tanaylab.github.io/metacell) R
 package.
 
 #### Quick Links
@@ -22,7 +22,7 @@ package.
 -   Processed data is avaliable under GEO accession
     [GSE123139](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE123139)
 -   Raw UMI counts for all cells with metacell membership information:
-    [Li2018\_umi\_counts.tar.gz](http://www.wisdom.weizmann.ac.il/~lubling/Li2018/Li2018_umi_counts.tar.gz).
+    [Li2018\_umi\_counts.tar.gz](https://li-melanoma-2018.s3.eu-west-1.amazonaws.com/Li2018_umi_counts.tar.gz).
     This gzipped archive contains a gene-cells UMI table in
     matrix-market format and a metadata table per cell. The metadata
     table also contains the metacell membership and the annotated group
